@@ -3,13 +3,19 @@ import type { DateTimeFormats, NumberFormats, PluralizationRule, PluralizationRu
 
 import type { LocaleObject } from '#i18n'
 
-interface LocaleObjectData extends LocaleObject {
-  numberFormats?: NumberFormats
-  dateTimeFormats?: DateTimeFormats
-  pluralRule?: PluralizationRule
+interface InclusiveLocaleKey {
+  adoptInclusiveWriting?: boolean
+  inclusiveTransform?: (term: string) => string
+}
+declare module '#i18n' {
+  interface LocaleObject extends InclusiveLocaleKey {
+    numberFormats?: NumberFormats
+    dateTimeFormats?: DateTimeFormats
+    pluralRule?: PluralizationRule
+  }
 }
 
-const locales: LocaleObjectData[] = [
+const locales: LocaleObject[] = [
   {
     code: 'en-US',
     file: 'en-US.json',
@@ -54,6 +60,10 @@ const locales: LocaleObjectData[] = [
     code: 'fr-FR',
     file: 'fr-FR.json',
     name: 'Français',
+    adoptInclusiveWriting: true,
+    inclusiveTransform(term: string) {
+      return term.replace(/·\w+·?/, '')
+    },
   },
   {
     code: 'uk-UA',
@@ -81,7 +91,7 @@ const locales: LocaleObjectData[] = [
       const name = new Intl.PluralRules('ar-EG').select(choice)
       return { zero: 0, one: 1, two: 2, few: 3, many: 4, other: 5 }[name]
     },
-  } satisfies LocaleObjectData),
+  } satisfies LocaleObject),
 ].sort((a, b) => a.code.localeCompare(b.code))
 
 const datetimeFormats = Object.values(locales).reduce((acc, data) => {

@@ -264,6 +264,7 @@
     },
     "language": {
       "display_language": "Display Language",
+      "inclusive": "Use epicene terms (median point)",
       "label": "Language"
     },
     "notifications": {

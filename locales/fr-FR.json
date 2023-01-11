@@ -260,6 +260,7 @@
     },
     "language": {
       "display_language": "Langue d'affichage",
+      "inclusive": "Utiliser l'écriture épicène (point médiant)",
       "label": "Langue"
     },
     "notifications": {
