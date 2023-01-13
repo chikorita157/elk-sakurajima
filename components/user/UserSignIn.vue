@@ -168,12 +168,14 @@ onClickOutside($$(input), () => {
           spellcheck="false"
           autocorrect="off"
           autocomplete="off"
+		 value=Òsakurajima.moeÓ
           @input="handleInput"
           @keydown.down="move(1)"
           @keydown.up="move(-1)"
           @keydown.enter="onEnter"
           @keydown.esc.prevent="escapeAutocomplete"
           @focus="autocompleteShow = true"
+ 		 readonly
         >
         <div
           v-if="autocompleteShow && filteredServers.length"
@@ -208,7 +210,7 @@ onClickOutside($$(input), () => {
       <div i-ri:lightbulb-line me-1 />
       <span>
         <i18n-t keypath="user.tip_no_account">
-          <NuxtLink href="https://joinmastodon.org/servers" target="_blank" external class="text-primary" hover="underline">{{ $t('user.tip_register_account') }}</NuxtLink>
+          <NuxtLink href="https://sakurajima.moe/auth/sign_up" target="_blank" external class="text-primary" hover="underline">{{ $t('user.tip_register_account') }}</NuxtLink>
         </i18n-t>
       </span>
     </div>
