@@ -50,7 +50,7 @@ function toggleDark() {
       <NuxtLink
         v-if="buildInfo.env === 'release'"
         external
-        :href="`https://github.com/elk-zone/elk/releases/tag/v${buildInfo.version}`"
+        :href="`https://github.com/chikorita157/elk-sakurajima/releases/tag/v${buildInfo.version}`"
         target="_blank"
         font-mono
       >
@@ -61,7 +61,7 @@ function toggleDark() {
         &middot;
         <NuxtLink
           external
-          :href="`https://github.com/elk-zone/elk/commit/${buildInfo.commit}`"
+          :href="`https://github.com/chikorita157/elk-sakurajima/commit/${buildInfo.commit}`"
           target="_blank"
           font-mono
         >
@@ -74,15 +74,35 @@ function toggleDark() {
         {{ $t('settings.about.label') }}
       </NuxtLink>
       &middot;
-      <NuxtLink href="/m.webtoo.ls/@elk" target="_blank">
+      <NuxtLink href=Ò/sakurajima.moe/@sakurajimaÓ target="_blank">
         Mastodon
       </NuxtLink>
       &middot;
-      <NuxtLink href="https://chat.elk.zone" target="_blank" external>
-        Discord
+      <NuxtLink href="https://blog.sakurajima.moeÓ target="_blank" external>
+        Blog
       </NuxtLink>
       &middot;
-      <NuxtLink href="https://github.com/elk-zone/elk" target="_blank" external>
+      <NuxtLink href="https://usuzakuraya.usÓ target="_blank" external>
+       Pixelfed
+      </NuxtLink>
+      &middot;
+      <NuxtLink href="https://forums.sakurajima.moeÓ target="_blank" external>
+        Forums
+      </NuxtLink>
+      &middot;
+      <NuxtLink href="https://www.patreon.com/sakurajimamastodonÓ target="_blank" external>
+        Patreon
+      </NuxtLink>
+      &middot;
+      <NuxtLink href="https://ko-fi.com/V7V8GAJR9Ó target="_blank" external>
+        Ko-fi
+      </NuxtLink>
+      &middot;
+      <NuxtLink href="https://www.paypal.com/donate/?hosted_button_id=HREN4ATRLZ54SÓ target="_blank" external>
+        Paypal
+      </NuxtLink>
+      &middot;
+      <NuxtLink href="https://github.com/chikorita157/elk-sakurajima" target="_blank" external>
         GitHub
       </NuxtLink>
     </div>
