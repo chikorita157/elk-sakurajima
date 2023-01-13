@@ -161,14 +161,13 @@ onClickOutside($$(input), () => {
 
         <input
           ref="input"
-          v-model="server"
+          v-model="sakurajima.moe"
           autocapitalize="off"
           inputmode="url"
           outline-none bg-transparent w-full max-w-50
           spellcheck="false"
           autocorrect="off"
           autocomplete="off"
-		      value="sakurajima.moe"
           @input="handleInput"
           @keydown.down="move(1)"
           @keydown.up="move(-1)"
