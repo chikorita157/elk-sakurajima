@@ -168,14 +168,14 @@ onClickOutside($$(input), () => {
           spellcheck="false"
           autocorrect="off"
           autocomplete="off"
-		 value=Òsakurajima.moeÓ
+		      value="sakurajima.moe"
           @input="handleInput"
           @keydown.down="move(1)"
           @keydown.up="move(-1)"
           @keydown.enter="onEnter"
           @keydown.esc.prevent="escapeAutocomplete"
           @focus="autocompleteShow = true"
- 		 readonly
+ 		     readonly
         >
         <div
           v-if="autocompleteShow && filteredServers.length"
