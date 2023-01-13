@@ -79,7 +79,7 @@ function isValidUrl(str: string) {
 async function handleInput() {
   const input = server.trim()
   if (input.startsWith('https://'))
-    server = input.replace('https://', '')
+    server = input.replace('https://sakurajima.moe', '')
 
   if (input.length)
     displayError = false
@@ -161,7 +161,7 @@ onClickOutside($$(input), () => {
 
         <input
           ref="input"
-          v-model="sakurajima.moe"
+          v-model="server"
           autocapitalize="off"
           inputmode="url"
           outline-none bg-transparent w-full max-w-50
@@ -174,7 +174,6 @@ onClickOutside($$(input), () => {
           @keydown.enter="onEnter"
           @keydown.esc.prevent="escapeAutocomplete"
           @focus="autocompleteShow = true"
- 		     readonly
         >
         <div
           v-if="autocompleteShow && filteredServers.length"
