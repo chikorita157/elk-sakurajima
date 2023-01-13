@@ -5,6 +5,7 @@
 </template>
 
 <style>
+@import url("https://use.typekit.net/cjy0pnw.css");
 @font-face {
   font-display: swap;
   font-family: 'DM Sans';
