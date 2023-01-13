@@ -30,7 +30,6 @@ export default defineNuxtConfig({
     '~/modules/build-env',
     '~/modules/tauri/index',
     '~/modules/pwa/index', // change to '@vite-pwa/nuxt' once released and remove pwa module
-    '~/modules/stale-dep',
   ],
   experimental: {
     payloadExtraction: false,
@@ -86,7 +85,7 @@ export default defineNuxtConfig({
       buildInfo: {} as BuildInfo, // set in build-env module
       pwaEnabled: !isDevelopment || process.env.VITE_DEV_PWA === 'true',
       translateApi: '',
-      defaultServer: 'mas.to',
+      defaultServer: 'sakurajima.moe',
     },
     storage: {
       driver: isCI ? 'cloudflare' : 'fs',
@@ -94,7 +93,7 @@ export default defineNuxtConfig({
     },
   },
   routeRules: {
-    '/api/list-servers': { swr: true },
+    '/api/list-servers': { swr: false },
     '/manifest.webmanifest': {
       headers: {
         'Content-Type': 'application/manifest+json',
@@ -127,7 +126,7 @@ export default defineNuxtConfig({
         { property: 'og:title', content: 'Elk' },
         { property: 'og:description', content: 'A nimble Mastodon web client' },
         { property: 'og:type', content: 'website' },
-        { property: 'og:image', content: 'https://elk.zone/elk-og.png' },
+        { property: 'og:image', content: 'https://elk.sakurajima.moe/elk-og.png' },
         { property: 'og:image:width', content: '3800' },
         { property: 'og:image:height', content: '1900' },
         { property: 'og:site_name', content: 'Elk' },

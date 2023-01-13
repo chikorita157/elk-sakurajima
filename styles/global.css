@@ -3,7 +3,10 @@ html {
   width: 100%;
   width: 100vw;
 }
-
+body {
+  font-family: myriad-pro, sans-serif !important;
+}
+@import url("https://use.typekit.net/cjy0pnw.css");
 @font-face {
   font-display: swap;
   font-family: 'DM Mono';
