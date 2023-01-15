@@ -75,6 +75,7 @@ export default defineNuxtConfig({
     },
   },
   runtimeConfig: {
+    adminKey: '',
     cloudflare: {
       accountId: '',
       namespaceId: '',
