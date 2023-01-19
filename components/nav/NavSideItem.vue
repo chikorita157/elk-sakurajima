@@ -53,7 +53,7 @@ const noUserVisual = computed(() => isHydrated.value && props.userOnly && !curre
     :tabindex="noUserDisable ? -1 : null"
     @click="$scrollToTop"
   >
-    <CommonTooltip :disabled="!isMediumScreen" :content="text" placement="right">
+    <CommonTooltip :disabled="!isMediumOrLargeScreen" :content="text" placement="right">
       <div
         flex items-center gap4
         w-fit rounded-3
@@ -66,7 +66,7 @@ const noUserVisual = computed(() => isHydrated.value && props.userOnly && !curre
           <div :class="icon" text-xl />
         </slot>
         <slot>
-          <span block sm:hidden xl:block>{{ isHydrated ? text : '&nbsp;' }}</span>
+          <span block sm:hidden xl:block select-none>{{ isHydrated ? text : '&nbsp;' }}</span>
         </slot>
       </div>
     </CommonTooltip>

@@ -1,3 +1,4 @@
+import { withoutProtocol } from 'ufo'
 import type { mastodon } from 'masto'
 import type { EffectScope, Ref } from 'vue'
 import type { MaybeComputedRef, RemovableRef } from '@vueuse/core'
@@ -68,7 +69,7 @@ const publicInstance = ref<ElkInstance | null>(null)
 export const currentInstance = computed<null | ElkInstance>(() => currentUser.value ? instances.value[currentUser.value.server] ?? null : publicInstance.value)
 
 export function getInstanceDomain(instance: ElkInstance) {
-  return instance.accountDomain || instance.uri
+  return instance.accountDomain || withoutProtocol(instance.uri)
 }
 
 export const publicServer = ref('')
@@ -289,7 +290,7 @@ interface UseUserLocalStorageCache {
  * Create reactive storage for the current user
  */
 export function useUserLocalStorage<T extends object>(key: string, initial: () => T): Ref<T> {
-  if (process.server)
+  if (process.server || process.test)
     return shallowRef(initial())
 
   // @ts-expect-error bind value to the function
@@ -322,7 +323,7 @@ export function clearUserLocalStorage(account?: mastodon.v1.Account) {
   if (!account)
     return
 
-  const id = `${account.acct}@${currentInstance.value?.uri || currentServer.value}`
+  const id = `${account.acct}@${currentInstance.value ? getInstanceDomain(currentInstance.value) : currentServer.value}`
 
   // @ts-expect-error bind value to the function
   const cacheMap = useUserLocalStorage._ as Map<string, UseUserLocalStorageCache> | undefined

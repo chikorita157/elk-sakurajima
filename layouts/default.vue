@@ -2,7 +2,7 @@
 import { usePreferences } from '~/composables/settings'
 
 const route = useRoute()
-const userSettings = useUserSettings()
+const info = useBuildInfo()
 
 const wideLayout = computed(() => route.meta.wideLayout ?? false)
 
@@ -10,10 +10,12 @@ const showUserPicker = logicAnd(
   usePreferences('experimentalUserPicker'),
   () => useUsers().value.length > 1,
 )
+
+const isGrayscale = usePreferences('grayscaleMode')
 </script>
 
 <template>
-  <div h-full>
+  <div h-full :data-mode="isHydrated && isGrayscale ? 'grayscale' : ''">
     <main flex w-full mxa lg:max-w-80rem>
       <aside class="hidden sm:flex w-1/8 md:w-1/6 lg:w-1/5 xl:w-1/4 justify-end xl:me-4 zen-hide" relative>
         <div sticky top-0 w-20 xl:w-100 h-screen flex="~ col" lt-xl-items-center>
@@ -61,7 +63,9 @@ const showUserPicker = logicAnd(
         <div sticky top-0 h-screen flex="~ col" gap-2 py3 ms-2>
           <slot name="right">
             <div flex-auto />
+
             <PwaPrompt />
+            <LazyCommonPreviewPrompt v-if="info.env === 'preview'" />
             <NavFooter />
           </slot>
         </div>
