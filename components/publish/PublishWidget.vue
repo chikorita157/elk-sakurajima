@@ -97,6 +97,10 @@ const characterCount = $computed(() => {
   return length
 })
 
+const isExceedingCharacterLimit = $computed(() => {
+  return characterCount > characterLimit.value
+})
+
 const postLanguageDisplay = $computed(() => languagesNameList.find(i => i.code === (draft.params.language || preferredLanguage))?.nativeName)
 
 async function handlePaste(evt: ClipboardEvent) {
@@ -152,7 +156,7 @@ defineExpose({
 </script>
 
 <template>
-  <div v-if="isHydrated && currentUser" flex="~ col gap-4" py3 px2 sm:px4>
+  <div v-if="isHydrated && currentUser" flex="~ col gap-4" py3 px2 sm:px4 aria-roledescription="publish-widget">
     <template v-if="draft.editingStatus">
       <div flex="~ col gap-1">
         <div id="state-editing" text-secondary self-center>
@@ -292,9 +296,7 @@ defineExpose({
 
         <div flex-auto />
 
-        <div dir="ltr" pointer-events-none pe-1 pt-2 text-sm tabular-nums text-secondary flex gap="0.5" :class="{ 'text-rose-500': characterCount > characterLimit }">
-          {{ characterCount ?? 0 }}<span text-secondary-light>/</span><span text-secondary-light>{{ characterLimit }}</span>
-        </div>
+        <PublishCharacterCounter :max="characterLimit" :length="characterCount" />
 
         <CommonTooltip placement="top" :content="$t('tooltip.change_language')">
           <CommonDropdown placement="bottom" auto-boundary-max-size>
@@ -337,12 +339,12 @@ defineExpose({
           </button>
         </CommonTooltip>
 
-        <CommonTooltip v-else id="publish-tooltip" placement="top" :content="$t('tooltip.add_publishable_content')" :disabled="!isPublishDisabled">
+        <CommonTooltip v-else id="publish-tooltip" placement="top" :content="$t('tooltip.add_publishable_content')" :disabled="!(isPublishDisabled || isExceedingCharacterLimit)">
           <button
             btn-solid rounded-3 text-sm w-full flex="~ gap1" items-center
             md:w-fit
             class="publish-button"
-            :aria-disabled="isPublishDisabled"
+            :aria-disabled="isPublishDisabled || isExceedingCharacterLimit"
             aria-describedby="publish-tooltip"
             @click="publish"
           >
