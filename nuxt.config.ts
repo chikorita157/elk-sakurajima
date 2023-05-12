@@ -255,6 +255,7 @@ export default defineNuxtConfig({
 })
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace NodeJS {
     interface Process {
       mock?: Record<string, any>
@@ -262,7 +263,7 @@ declare global {
   }
 }
 
-declare module 'nuxt/dist/app' {
+declare module '#app' {
   interface RuntimeNuxtHooks {
     'elk-logo:click': () => void
   }
