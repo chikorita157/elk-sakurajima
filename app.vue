@@ -9,7 +9,7 @@ if (import.meta.server && !route.path.startsWith('/settings')) {
 
   useHead({
     meta: [
-      { property: 'og:url', content: `https://elk.sakurajima.moe${route.path}` },
+	  { property: 'og:url', content: `${url.origin}${route.path}` },
   })
 }
 
