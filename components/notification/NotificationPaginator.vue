@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { mastodon } from 'masto'
 // @ts-expect-error missing types
 import { DynamicScrollerItem } from 'vue-virtual-scroller'
-import type { mastodon } from 'masto'
 import type { GroupedAccountLike, NotificationSlot } from '~/types'
 
 const { paginator, stream } = defineProps<{
@@ -25,7 +25,7 @@ function includeNotificationsForStatusCard({ type, status }: mastodon.v1.Notific
 
 // Group by type (and status when applicable)
 function groupId(item: mastodon.v1.Notification): string {
-  // If the update is related to an status, group notifications from the same account (boost + favorite the same status)
+  // If the update is related to a status, group notifications from the same account (boost + favorite the same status)
   const id = item.status
     ? {
         status: item.status?.id,
@@ -171,6 +171,7 @@ const { formatNumber } = useHumanReadableNumber()
     :paginator="paginator"
     :preprocess="preprocess"
     :stream="stream"
+    eventType="notification"
     :virtualScroller="virtualScroller"
   >
     <template #updater="{ number, update }">

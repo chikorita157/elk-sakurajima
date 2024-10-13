@@ -7,8 +7,11 @@ export type OldFontSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export type ColorMode = 'light' | 'dark' | 'system'
 
+export type NavButtonName = 'home' | 'search' | 'notification' | 'mention' | 'explore' | 'local' | 'federated' | 'moreMenu'
+
 export interface PreferencesSettings {
   hideAltIndicatorOnPosts: boolean
+  hideGifIndicatorOnPosts: boolean
   hideBoostCount: boolean
   hideReplyCount: boolean
   hideFavoriteCount: boolean
@@ -64,6 +67,7 @@ export function getDefaultLanguage(languages: string[]) {
 
 export const DEFAULT__PREFERENCES_SETTINGS: PreferencesSettings = {
   hideAltIndicatorOnPosts: false,
+  hideGifIndicatorOnPosts: false,
   hideBoostCount: false,
   hideReplyCount: false,
   hideFavoriteCount: false,

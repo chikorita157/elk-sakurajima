@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { ConfirmDialogChoice, ConfirmDialogOptions } from '~/types'
-import DurationPicker from '~/components/modal/DurationPicker.vue'
 
 const props = defineProps<ConfirmDialogOptions>()
 
@@ -17,7 +16,7 @@ const isMute = computed(() => props.extraOptionType === 'mute')
 function handleChoice(choice: ConfirmDialogChoice['choice']) {
   const dialogChoice = {
     choice,
-    ...isMute && {
+    ...isMute.value && {
       extraOptions: {
         mute: {
           duration: hasDuration.value ? duration.value : 0,

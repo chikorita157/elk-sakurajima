@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import type { ComponentPublicInstance } from 'vue'
 // @ts-expect-error missing types
 import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller'
-import type { ComponentPublicInstance } from 'vue'
 
 definePageMeta({
   name: 'status',
@@ -21,7 +21,7 @@ const { data: status, pending, refresh: refreshStatus } = useAsyncData(
 )
 const { client } = useMasto()
 const { data: context, pending: pendingContext, refresh: refreshContext } = useAsyncData(
-  `context:${id}`,
+  `context:${id.value}`,
   async () => client.value.v1.statuses.$select(id.value).context.fetch(),
   { watch: [isHydrated], immediate: isHydrated.value, lazy: true, default: () => shallowRef() },
 )
@@ -85,10 +85,10 @@ onReactivated(() => {
             style="scroll-margin-top: 60px"
             @refetch-status="refreshStatus()"
           />
-          <PublishWidget
+          <PublishWidgetList
             v-if="currentUser"
             ref="publishWidget"
-            border="y base"
+            class="border-y border-base"
             :draft-key="replyDraft!.key"
             :initial="replyDraft!.draft"
             @published="refreshContext()"

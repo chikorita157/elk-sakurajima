@@ -31,6 +31,7 @@ export const countryLocaleVariants: Record<string, (LocaleObjectData & { country
   en: [
     // en.json contains en-US translations
     { country: true, code: 'en-US', name: 'English (US)' },
+    { code: 'en-CA', name: 'English (Canada)' },
     { code: 'en-GB', name: 'English (UK)' },
   ],
   ca: [
@@ -112,6 +113,11 @@ const locales: LocaleObjectData[] = [
     code: 'ca',
     file: 'ca.json',
     name: 'Català',
+  },
+  {
+    code: 'el-GR',
+    file: 'el-GR.json',
+    name: 'Ελληνικά',
   },
   {
     code: 'de-DE',
@@ -212,8 +218,8 @@ const locales: LocaleObjectData[] = [
     name: 'Indonesia',
   },
   {
-    code: 'fi-FI',
-    file: 'fi-FI.json',
+    code: 'fi',
+    file: 'fi.json',
     name: 'Suomi',
   },
   {

@@ -1,13 +1,13 @@
 <script setup lang="ts" generic="T, O, U = T">
+import type { mastodon } from 'masto'
 // @ts-expect-error missing types
 import { DynamicScroller } from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
-import type { mastodon } from 'masto'
-import type { UnwrapRef } from 'vue'
 
 const {
   paginator,
   stream,
+  eventType,
   keyProp = 'id',
   virtualScroller = false,
   preprocess,
@@ -17,6 +17,7 @@ const {
   keyProp?: keyof T
   virtualScroller?: boolean
   stream?: mastodon.streaming.Subscription
+  eventType?: 'update' | 'notification'
   preprocess?: (items: (U | T)[]) => U[]
   endMessage?: boolean | string
 }>()
@@ -31,7 +32,7 @@ defineSlots<{
     newer: U // newer is undefined when index === 0
   }) => void
   items: (props: {
-    items: UnwrapRef<U[]>
+    items: U[]
   }) => void
   updater: (props: {
     number: number
@@ -44,7 +45,7 @@ defineSlots<{
 const { t } = useI18n()
 const nuxtApp = useNuxtApp()
 
-const { items, prevItems, update, state, endAnchor, error } = usePaginator(paginator, toRef(() => stream), preprocess)
+const { items, prevItems, update, state, endAnchor, error } = usePaginator(paginator, toRef(() => stream), eventType, preprocess)
 
 nuxtApp.hook('elk-logo:click', () => {
   update()
@@ -72,7 +73,7 @@ defineExpose({ createEntry, removeEntry, updateEntry })
 <template>
   <div>
     <slot v-if="prevItems.length" name="updater" v-bind="{ number: prevItems.length, update }" />
-    <slot name="items" :items="items">
+    <slot name="items" :items="items as U[]">
       <template v-if="virtualScroller">
         <DynamicScroller
           v-slot="{ item, active, index }"
